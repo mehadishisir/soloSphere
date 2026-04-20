@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 const Navbar = () => {
   const {user}= useContext(AuthContext)
+  console.log(user)
   return (
     <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto'>
       <div className='flex-1'>
@@ -30,11 +31,11 @@ const Navbar = () => {
             role='button'
             className='btn btn-ghost btn-circle avatar'
           >
-            <div className='w-10 rounded-full' title=''>
+            <div title={user?.displayName || "User Profile"}   className='w-10 rounded-full' >
               <img
                 referrerPolicy='no-referrer'
                 alt='User Profile Photo'
-                src=''
+                src={user?.photoURL || "https://placeimg.com/80/80/people"}
               />
             </div>
           </div>
