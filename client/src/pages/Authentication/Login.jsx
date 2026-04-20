@@ -1,8 +1,22 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import logo from "../../assets/image/logo.png"
 import lg from "../../assets/image/login.jpg"
+import { useContext } from "react"
+import { AuthContext } from "../../provider/AuthProvider"
+import toast from "react-hot-toast"
 
 const Login = () => {
+  const {signInWithGoogle,signIn} = useContext(AuthContext)
+  const handleGoogleSignIn = async() => {
+    try{
+      await signInWithGoogle()
+      toast.success("Login successful")
+      Navigate("/")
+    }catch(error){
+      console.log(error)
+      toast.error(error?.message || "Login failed")
+    }
+  }
   return (
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)]'>
       <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
@@ -28,7 +42,7 @@ const Login = () => {
             Welcome back!
           </p>
 
-          <div className='flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
+          <div onClick={handleGoogleSignIn} className='flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
             <div className='px-4 py-2'>
               <svg className='w-6 h-6' viewBox='0 0 40 40'>
                 <path
