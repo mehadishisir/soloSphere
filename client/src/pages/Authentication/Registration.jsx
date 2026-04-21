@@ -37,6 +37,10 @@ const Registration = () => {
   const password =form.password.value
   console.log({email,name,photo,password})
   try{
+    await createUser(email, password)
+    await updateUserProfile(name, photo)
+    toast.success("Registration successful")
+    navigate("/")
 
   }catch(error) {
 console.log(error)
