@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import logo from "../../assets/image/logo.png"
 import rg from "../../assets/image/register.jpg"
 import { useContext } from "react"
@@ -14,12 +14,13 @@ const Registration = () => {
     signInWithGoogle,
  
     updateUserProfile} = useContext(AuthContext)
+    const navigate = useNavigate()
     // googleSignUp
      const handleGoogleSignIn = async() => {
     try{
       await signInWithGoogle()
       toast.success("Login successful")
-      Navigate("/")
+      navigate("/")
     }catch(error){
       console.log(error)
       toast.error(error?.message && "Login failed")
