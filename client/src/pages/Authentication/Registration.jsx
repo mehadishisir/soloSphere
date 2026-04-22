@@ -39,6 +39,7 @@ const Registration = () => {
   try{
     await createUser(email, password)
     await updateUserProfile(name, photo)
+    setUser({...user, displayName:name, photoURL:photo})
     toast.success("Registration successful")
     navigate("/")
 
